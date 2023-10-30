@@ -14,5 +14,15 @@ if (isset($_POST["name"]) && isset($_POST["last_name"]) && isset($_POST["age"]))
     } else{
         echo "Ошибка: " . $conn->error;
     }
-    $conn->close();
+
+    $sql = "SELECT * FROM Users";
+    if($result = $conn->query($sql)) {
+        while($row = $result->fetch_array()){
+            $userid = $row["id"];
+            $username = $row["name"];
+            $userage = $row["age"];
+        }
+    }
+
+    $result->free();
 }
